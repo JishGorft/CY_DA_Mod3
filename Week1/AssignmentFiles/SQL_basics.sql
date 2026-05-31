@@ -10,18 +10,18 @@ USE coffeeshop_db;
 select name, price from products
 order by price desc;
 -- Q2) Show all customers who live in the city of 'Lihue'.
-
+select first_name, last_name, city = 'Lihue' FROM customers;
 -- Q3) Return the first 5 orders by earliest order_datetime (order_id, order_datetime).
-
+SELECT order_id, order_datetime FROM orders ORDER BY order_datetime ASC LIMIT 5;
 -- Q4) Find all products with the word 'Latte' in the name.
-
+SELECT name FROM products WHERE name LIKE '%Latte%';
 -- Q5) Show distinct payment methods used in the dataset.
-
+SELECT DISTINCT payment_method FROM orders;
 -- Q6) For each store, list its name and city/state (one row per store).
-
+SELECT name, city, state FROM stores;
 -- Q7) From orders, show order_id, status, and a computed column total_items
 --     that counts how many items are in each order.
-
+SELECT order_id, status FROM orders, COUNT(order_id) AS items_per_order;
 -- Q8) Show orders placed on '2025-09-04' (any time that day).
 
 -- Q9) Return the top 3 most expensive products (price, name).
