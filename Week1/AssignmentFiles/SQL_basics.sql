@@ -26,11 +26,17 @@ SELECT name, city, state FROM stores;
 
 -- Q7) From orders, show order_id, status, and a computed column total_items
 --     that counts how many items are in each order.
--- --- --- WTF?
+SELECT o.order_id AS order_id,
+	o.status AS status,
+    SUM(oi.quantity) AS total_items
+FROM orders o
+LEFT JOIN order_items oi
+	ON oi.order_id = o.order_id
+GROUP BY o.order_id;
 
 -- Q8) Show orders placed on '2025-09-04' (any time that day).
 SELECT order_id, order_datetime FROM orders WHERE order_datetime > '2025-09-04' AND order_datetime < '2025-09-05';
--- Not entirely certain why WHERE order_datetime = '2025-09-04' does't work. Maybe instead LIKE '%2025-09-04'
+-- Not entirely certain why WHERE order_datetime = '2025-09-04' does't work. Maybe instead LIKE '%2025-09-04%' ?
 
 -- Q9) Return the top 3 most expensive products (price, name).
 SELECT price, name FROM products ORDER BY price DESC LIMIT 3;
